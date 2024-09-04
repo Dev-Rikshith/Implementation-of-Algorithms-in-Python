@@ -36,6 +36,25 @@ class Node():
             if(current.right):
                 queue.append(current.right)
 
+    def tree_includes(self, target):
+        queue = []
+        queue.append(self)
+        while(len(queue)!=0):
+            current = queue.pop(0)
+            if(current.val==target):
+                return True
+            if(current.left):
+                queue.append(current.left)
+            if(current.right):
+                queue.append(current.right)
+
+    def tree_includes_recursive(self, target):
+        if(self.val == target):
+            return True
+        if(self == None):
+            return False
+        return self.tree_includes_recursive(self.right) or self.tree_includes_recursive(self.left)
+
 
 if __name__ == "__main__":
     a = Node("a")
@@ -51,7 +70,8 @@ if __name__ == "__main__":
     b.right = e
     c.right = f
 
-    a.BFS()
+    if a.tree_includes_recursive("e"):
+        print("Element found")
 
     #     a   
     #    /  \
